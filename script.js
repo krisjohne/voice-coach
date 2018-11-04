@@ -15,7 +15,7 @@ let words = [
   "playful",
   "friendly",
   "loving",
-  "recouperate"
+  "recuperate"
 ];
 
 let prompt = $('#prompt');

@@ -59,7 +59,7 @@ body {
   margin: 0;
   min-height: 4vw;
   grid-area: ta;
-  font-size: 5vw;
+  font-size: 80px;
   font-family: 'Corben', cursive;
   font-weight: bold;
   color: #a3a2a2;
@@ -68,14 +68,14 @@ body {
 #level-display {
   grid-area: l;
   font-family: 'PT Mono', monospace;
-  font-size: 3vw;
+  font-size: 40px;
   color: #a3a2a2;
 }
 
 #prompt {
   margin-top: 10vw;
   grid-area: p;
-  font-size: 5vw;
+  font-size: 80px;
   font-family: 'Corben', cursive;
   font-weight: bold;
   color: #4f3896;
@@ -85,7 +85,7 @@ body {
 #score-display {
   grid-area: sc;
   font-family: 'PT Mono', monospace;
-  font-size: 3vw;
+  font-size: 40px;
   color: #a3a2a2;
 }
 
@@ -143,20 +143,43 @@ body {
   margin-bottom: 40px;
 }
 
-@media (max-width: 768px) {
-  .container {
+@media (max-width: 1200px) {
+  /* .container {
     padding: 50px 25px;
   }
-
   button {
     margin-bottom: 10px;
+  } */
+  /* .container {
+    background-color: pink;
+  } */
+  #level-display{
+    font-size: 20px;
   }
+  #score-display {
+    font-size: 20px;
+  }
+  #prompt {
+    margin-top: 100px;
+    font-size: 45px;
+  }
+  #input-single {
+    font-size: 45px;
+    margin-bottom: 100px;
+    line-height: 55px;
+  }
+  .button {
+    width: 100px;
+    height: 100px;
+
+  }
+
 }
 
 .button {
   margin: 4vw auto 0;
-  width: 8vw;
-  height: 8vw;
+  width: 100px;
+  height: 100px;
   border: 0.5vw solid #4f3896;
   border-radius: 50%;
   cursor: pointer;
@@ -178,8 +201,8 @@ body {
 }
 
 /* -- Demo ads -- */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   #bsaHolder {
     display: none;
   }
-}
+} */
