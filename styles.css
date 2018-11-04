@@ -27,11 +27,11 @@ body {
     "st st st st st"
     "l p p p sc"
     "ta ta ta ta ta"
-    ". . b . ."
+    "b b b b b"
     "h h h h h"
     "w w w w w"
     "r r r r r";
-    margin: 0 auto;
+    /* margin: 0 auto; */
   padding: 50px 50px;
   text-align: center;
 }
@@ -52,7 +52,9 @@ body {
   grid-area: t;
 }
 
-.input-single {
+#input-single {
+  text-align: center;
+  height: 10vh;
   grid-area: ta;
 }
 
