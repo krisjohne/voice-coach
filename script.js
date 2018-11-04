@@ -26,6 +26,11 @@ var noteContent = '';
 // MY STUFF
 let myText = $('#my-text');
 let myResult = $('#my-result');
+let myLevel = $('#level-display');
+let myScore = $('#score-display');
+
+console.log(myLevel);
+console.log(myScore);
 // let myText = document.querySelector("#my-text");
 // let myResult = document.querySelector("#my-result");
 // let myTranscript = myText[0].innerHTML;
@@ -80,11 +85,16 @@ function MainGame() {
   if (compare(noteContent, words[level])) {
     myResult[0].innerHTML = "CORRECT";
     level++;
+    myLevel[0].innerHTML = "Level " + level;
     changeLevel();
     score += 100;
+    myScore[0].innerHTML = score;
     console.log("level: " + level + "score: " + score);
   } else {
     myResult[0].innerHTML = "INCORRECT";
+    score -= 20;
+    myScore[0].innerHTML = score;
+    console.log()
   }
 }
 
@@ -258,6 +268,6 @@ function changeLevel() {
     alert("You completed the game!");
   } else {
     console.log("In changeLevel()");
-    prompt[0].innerHTML = "Say " + "\"" + words[level] + "\"";
+    prompt[0].innerHTML = "\"" + words[level] + "\"";
   }
 }

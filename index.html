@@ -14,41 +14,42 @@
 
 <body>
   <div class="container">
+    <h3 id="level-display">level</h3>
+    <h3 id="score-display">score</h3>
 
-    <h1>Pronunciation Hero</h1>
-    <p class="page-description">A game to help you with pronunciation of words and phrases!</p>
+    <!-- <h1 id="title">Pronunciation Hero</h1>
+    <p class="page-description">A game to help you with pronunciation of words and phrases!</p> -->
     <!-- <p><a class="tz-link" href="https://tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript">Read the full article on Tutorialzine »</a></p> -->
 
     <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
 
-    <div class="app">
-      <!-- <h3>Add New Note</h3> -->
+    <!-- <div class="app"> -->
+    <!-- <h3>Add New Note</h3> -->
 
-      <h1 id="prompt"></h1>
+    <h1 id="prompt"></h1>
 
-      <div class="input-single">
-        <textarea id="note-textarea" rows="1"></textarea>
-      </div>
+    <div class="input-single">
+      <textarea id="note-textarea" rows="1"></textarea>
+    </div>
 
-      <div class="button" id="start-record-btn" title="Start Recording">
-        <div class="inner"> </div>
-      </div>
-      <!-- <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+    <div class="button" id="start-record-btn" title="Start Recording">
+      <div class="inner"></div>
+    </div>
+    <!-- <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
                 <button id="save-note-btn" title="Save Note">Save Note</button> -->
-      <p id="recording-instructions">Press the <strong>Start/Stop</strong> button and allow access.</p>
+    <p id="recording-instructions">Press the <strong>Start/Stop</strong> button and allow access.</p>
 
-      <!-- <h3>My Notes</h3>
+    <!-- <h3>My Notes</h3>
                 <ul id="notes">
                     <li>
                         <p class="no-notes">You don't have any notes.</p>
                     </li>
                 </ul> -->
 
-    </div>
 
-    <h1 id="my-text">We think you said: </h1>
-    <h1 id="my-result">Result: </h1>
-  </div>
+  <h1 id="my-text" hidden>We think you said: </h1>
+  <h1 id="my-result" hidden>Result: </h1>
+  <!-- </div> -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="script.js"></script>
