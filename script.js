@@ -7,6 +7,7 @@ try {
   $('.app').hide();
 }
 
+let recording_state = false;
 
 var noteTextarea = $('#note-textarea');
 var instructions = $('#recording-instructions');
@@ -95,7 +96,15 @@ $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
     noteContent += ' ';
   }
-  recognition.start();
+
+  if (!recording_state) {
+    recognition.start();
+    recording_state = true;
+  }
+  else {
+    recognition.stop();
+    recording_state = false;
+  }
 });
 
 
