@@ -1,7 +1,9 @@
+/* NOT NEEDED
 ul {
     list-style: none;
     padding: 0;
 }
+*/
 
 p {
     color: #444;
@@ -31,11 +33,11 @@ button:focus {
     margin: 0 auto;
 }
 
-.tz-link {
+/* .tz-link {
     font-size: 1em;
     color: #1da7da;
     text-decoration: none;
-}
+} */
 
 .no-browser-support {
     display: none;
@@ -85,7 +87,7 @@ button:focus {
         margin-bottom: 10px;
     }
 
-}   
+}
 
 
 
