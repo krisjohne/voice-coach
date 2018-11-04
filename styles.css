@@ -7,6 +7,10 @@ p {
     color: #444;
 }
 
+button {
+    border-radius: 50%;
+}
+
 button:focus {
     outline: 0;
 }
