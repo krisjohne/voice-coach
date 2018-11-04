@@ -7,6 +7,14 @@ try {
   $('.app').hide();
 }
 
+// words to prompt
+let words = ["apple", "he says she says", "banana", "theater"];
+let prompt = $('#prompt');
+let level = 0;
+let score = 0;
+
+changeLevel();
+
 let recording_state = false;
 
 var noteTextarea = $('#note-textarea');
@@ -25,7 +33,6 @@ let myResult = $('#my-result');
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
 renderNotes(notes);
-
 
 
 /*-----------------------------
@@ -59,18 +66,27 @@ recognition.onresult = function(event) {
 
     // TEST WHERE DOES IT UPDATE?
     console.log(noteContent);
-    myText[0].innerHTML += noteContent;
+    myText[0].innerHTML = "We think you said " + noteContent;
 
-    noteTextarea.val(noteContent);
+    noteTextarea.val(transcript);
 
-    if (compare(noteContent, "Apple")) {
-      myResult[0].innerHTML = "CORRECT";
-    } else {
-      myResult[0].innerHTML = "INCORRECT";
-    }
-
+    MainGame();
   }
 };
+
+function MainGame() {
+  changeLevel();
+  // compare level
+  if (compare(noteContent, words[level])) {
+    myResult[0].innerHTML = "CORRECT";
+    level++;
+    changeLevel();
+    score += 100;
+    console.log("level: " + level + "score: " + score);
+  } else {
+    myResult[0].innerHTML = "INCORRECT";
+  }
+}
 
 recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
@@ -94,17 +110,20 @@ recognition.onerror = function(event) {
 
 $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
-    noteContent += ' ';
+    noteContent = '';
+    noteTextarea.val('');
   }
 
   if (!recording_state) {
     recognition.start();
     recording_state = true;
-  }
-  else {
+  } else {
     recognition.stop();
     recording_state = false;
   }
+
+  // Fancy button script
+  $(this).toggleClass("active");
 });
 
 
@@ -227,9 +246,18 @@ function deleteNote(dateTime) {
 }
 
 function compare(user_input, key) {
-  if (user_input == key) {
+  if (user_input.toLowerCase() == key.toLowerCase()) {
     return true;
   } else {
     return false;
+  }
+}
+
+function changeLevel() {
+  if (level >= words.length) {
+    alert("You completed the game!");
+  } else {
+    console.log("In changeLevel()");
+    prompt[0].innerHTML = "Say " + "\"" + words[level] + "\"";
   }
 }
