@@ -1,8 +1,7 @@
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
-}
-catch(e) {
+} catch (e) {
   console.error(e);
   $('.no-browser-support').show();
   $('.app').hide();
@@ -15,6 +14,13 @@ var notesList = $('ul#notes');
 
 var noteContent = '';
 
+// MY STUFF
+let myText = $('#my-text');
+let myResult = $('#my-result');
+// let myText = document.querySelector("#my-text");
+// let myResult = document.querySelector("#my-result");
+// let myTranscript = myText[0].innerHTML;
+
 // Get all notes from previous sessions and display them.
 var notes = getAllNotes();
 renderNotes(notes);
@@ -22,19 +28,19 @@ renderNotes(notes);
 
 
 /*-----------------------------
-      Voice Recognition 
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+// allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. 
+  // It holds all the lines we have captured so far.
   // We only need the current one.
   var current = event.resultIndex;
 
@@ -46,13 +52,26 @@ recognition.onresult = function(event) {
   // There is no official solution so far so we have to handle an edge case.
   var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 
-  if(!mobileRepeatBug) {
+  if (!mobileRepeatBug) {
     noteContent += transcript;
     noteTextarea.val(noteContent);
+
+    // TEST WHERE DOES IT UPDATE?
+    console.log(noteContent);
+    myText[0].innerHTML += noteContent;
+
+    noteTextarea.val(noteContent);
+
+    if (compare(noteContent, "Apple")) {
+      myResult[0].innerHTML = "CORRECT";
+    } else {
+      myResult[0].innerHTML = "INCORRECT";
+    }
+
   }
 };
 
-recognition.onstart = function() { 
+recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
 }
 
@@ -61,15 +80,15 @@ recognition.onspeechend = function() {
 }
 
 recognition.onerror = function(event) {
-  if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+  if (event.error == 'no-speech') {
+    instructions.text('No speech was detected. Try again.');
   };
 }
 
 
 
 /*-----------------------------
-      App buttons and input 
+      App buttons and input
 ------------------------------*/
 
 $('#start-record-btn').on('click', function(e) {
@@ -93,10 +112,9 @@ noteTextarea.on('input', function() {
 $('#save-note-btn').on('click', function(e) {
   recognition.stop();
 
-  if(!noteContent.length) {
+  if (!noteContent.length) {
     instructions.text('Could not save empty note. Please add a message to your note.');
-  }
-  else {
+  } else {
     // Save note to localStorage.
     // The key is the dateTime with seconds, the value is the content of the note.
     saveNote(new Date().toLocaleString(), noteContent);
@@ -107,7 +125,7 @@ $('#save-note-btn').on('click', function(e) {
     noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
-      
+
 })
 
 
@@ -116,14 +134,14 @@ notesList.on('click', function(e) {
   var target = $(e.target);
 
   // Listen to the selected note.
-  if(target.hasClass('listen-note')) {
+  if (target.hasClass('listen-note')) {
     var content = target.closest('.note').find('.content').text();
     readOutLoud(content);
   }
 
   // Delete note.
-  if(target.hasClass('delete-note')) {
-    var dateTime = target.siblings('.date').text();  
+  if (target.hasClass('delete-note')) {
+    var dateTime = target.siblings('.date').text();
     deleteNote(dateTime);
     target.closest('.note').remove();
   }
@@ -132,42 +150,41 @@ notesList.on('click', function(e) {
 
 
 /*-----------------------------
-      Speech Synthesis 
+      Speech Synthesis
 ------------------------------*/
 
 function readOutLoud(message) {
-	var speech = new SpeechSynthesisUtterance();
+  var speech = new SpeechSynthesisUtterance();
 
   // Set the text and voice attributes.
-	speech.text = message;
-	speech.volume = 1;
-	speech.rate = 1;
-	speech.pitch = 1;
-  
-	window.speechSynthesis.speak(speech);
+  speech.text = message;
+  speech.volume = 1;
+  speech.rate = 1;
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(speech);
 }
 
 
 
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 function renderNotes(notes) {
   var html = '';
-  if(notes.length) {
+  if (notes.length) {
     notes.forEach(function(note) {
-      html+= `<li class="note">
+      html += `<li class="note">
         <p class="header">
           <span class="date">${note.date}</span>
           <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
           <a href="#" class="delete-note" title="Delete">Delete</a>
         </p>
         <p class="content">${note.content}</p>
-      </li>`;    
+      </li>`;
     });
-  }
-  else {
+  } else {
     html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
   }
   notesList.html(html);
@@ -185,18 +202,25 @@ function getAllNotes() {
   for (var i = 0; i < localStorage.length; i++) {
     key = localStorage.key(i);
 
-    if(key.substring(0,5) == 'note-') {
+    if (key.substring(0, 5) == 'note-') {
       notes.push({
-        date: key.replace('note-',''),
+        date: key.replace('note-', ''),
         content: localStorage.getItem(localStorage.key(i))
       });
-    } 
+    }
   }
   return notes;
 }
 
 
 function deleteNote(dateTime) {
-  localStorage.removeItem('note-' + dateTime); 
+  localStorage.removeItem('note-' + dateTime);
 }
 
+function compare(user_input, key) {
+  if (user_input == key) {
+    return true;
+  } else {
+    return false;
+  }
+}
