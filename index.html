@@ -9,13 +9,19 @@
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css"> -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Corben:700|PT+Mono" rel="stylesheet">
+
+
+
+
 
 </head>
 
 <body>
   <div class="container">
-    <h3 id="level-display">level</h3>
-    <h3 id="score-display">score</h3>
+    <h3 id="level-display" class="shake-rotate shake-constant--hover">level</h3>
+    <h3 id="score-display" class="shake-opacity shake-constant--hover">score</h3>
 
     <!-- <h1 id="title">Pronunciation Hero</h1>
     <p class="page-description">A game to help you with pronunciation of words and phrases!</p> -->
@@ -37,7 +43,7 @@
     </div>
     <!-- <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
                 <button id="save-note-btn" title="Save Note">Save Note</button> -->
-    <p id="recording-instructions">Press the <strong>Start/Stop</strong> button and allow access.</p>
+    <p id="recording-instructions" hidden>Press the <strong>Start/Stop</strong> button and allow access.</p>
 
     <!-- <h3>My Notes</h3>
                 <ul id="notes">

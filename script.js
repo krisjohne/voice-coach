@@ -8,7 +8,16 @@ try {
 }
 
 // words to prompt
-let words = ["apple", "he says she says", "banana", "theater"];
+let words = [
+  "apple",
+  "banana",
+  "theater",
+  "playful",
+  "friendly",
+  "loving",
+  "recouperate"
+];
+
 let prompt = $('#prompt');
 let level = 0;
 let score = 0;
@@ -93,11 +102,13 @@ function MainGame() {
     score += 100;
     myScore[0].innerHTML = score;
     console.log("level: " + level + "score: " + score);
+    good_shake();
   } else {
     myResult[0].innerHTML = "INCORRECT";
     score -= 20;
     myScore[0].innerHTML = score;
     console.log()
+    bad_shake();
   }
 }
 
@@ -273,4 +284,18 @@ function changeLevel() {
     console.log("In changeLevel()");
     prompt[0].innerHTML = "\"" + words[level] + "\"";
   }
+}
+
+function bad_shake() {
+  myScore[0].classList.add("shake-constant");
+  setTimeout(function() {
+    myScore[0].classList.remove("shake-constant");
+  }, 1000);
+}
+
+function good_shake() {
+  myLevel[0].classList.add("shake-constant");
+  setTimeout(function() {
+    myLevel[0].classList.remove("shake-constant");
+  }, 1000);
 }
